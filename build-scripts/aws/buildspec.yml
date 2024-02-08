@@ -21,7 +21,13 @@ phases:
   install:
     commands:
       - mkdir $HOME/.docker
-      - nohup service docker start &
+      - which docker
+      - docker -v
+      - nohup dockerd &
+      # - sleep 2
+      # - service docker start
+      # - systemctl status docker.service
+      # - nohup service docker start &
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
   pre_build:
     commands:
